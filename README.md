@@ -1,2 +1,2 @@
-# DockerTestExercise
-Test exercise. Working with Docker
+# Docker & Jenkins
+Working with Docker and Jenkins
