@@ -1,0 +1,26 @@
+#!groovy
+
+properties([disableConcurrentBuilds()])
+
+pipeline {
+	agent any
+
+	stages {
+		stage("create docker images"){
+			
+			steps {
+				script {
+					def subfolders = sh(returnStdout: true, script:'ls').trim().split(System.getProperty("line.separator"))
+					def size=subfolders.size()
+					for (int i=0;i<size;i++){
+						dir("${subfolders[i]}"){
+							if (fileExists('./Dockerfile')){
+								sh "docker build -t ${subfolders[i]}:v1 ."
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
